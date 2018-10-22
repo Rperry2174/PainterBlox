@@ -24,13 +24,13 @@ public class GroundCubeController : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("entered");
+        //Debug.Log("entered");
 		ChangeColor(triggerBoxColor);
     }
 
 	private void OnTriggerExit(Collider other)
     {
-		Debug.Log("entered");
+		//Debug.Log("entered");
 		ChangeColor(originalBoxColor);
     }
 

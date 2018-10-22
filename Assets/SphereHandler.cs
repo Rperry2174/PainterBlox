@@ -8,37 +8,60 @@ using UnityEngine;
 	protected Joybutton joybutton;
     
 	protected bool jump;
+	public GameObject bulletPrefab;
 	public float velocityFactor = 2.5f;
 	public float speed;
+	public bool isTouching = false;
+	public Vector3 lastPlayerDirection;
+	public Rigidbody rb;
 	
 	// Use this for initialization
 	void Start () {
 		joystick = FindObjectOfType<Joystick>();
 		joybutton = FindObjectOfType<Joybutton>();
+        rb = GetComponent<Rigidbody>();
+		lastPlayerDirection = new Vector3(joystick.Horizontal * velocityFactor,
+                                          rb.velocity.y,
+                                          joystick.Vertical * velocityFactor);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		var rb = GetComponent<Rigidbody>();
+
+
         Vector3 dir = new Vector3(joystick.Horizontal * velocityFactor,
                                   rb.velocity.y,
-                                     joystick.Vertical * velocityFactor);
-		
-		rb.velocity = dir;
+                                  joystick.Vertical * velocityFactor);
 
-		float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+		Vector3 adjustedDir = SnapJoystickDirection(dir);
+		Debug.Log("Dir         : " + dir);
+		Debug.Log("Adjusted dir: " + adjustedDir);
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);        
-		rb.AddForce(movement * speed);
+
+		//Debug.Log("dir: " + dir);
+		rb.velocity = adjustedDir;
+
+		//float moveHorizontal = Input.GetAxis("Horizontal");
+  //      float moveVertical = Input.GetAxis("Vertical");
+
+  //      Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);        
+		//rb.AddForce(movement * speed);
         
-		Debug.Log("gameobject" + dir);
-		transform.rotation = Quaternion.LookRotation(dir);
+		//Debug.Log("gameobject" + dir);
+		if(isTouching && (adjustedDir.x != 0 && adjustedDir.z != 0))
+		{
+			transform.rotation = Quaternion.LookRotation(dir);
+			lastPlayerDirection = dir;
+		}
 
         if(!jump && joybutton.Pressed)
 		{
 			jump = true;
-			rb.velocity += Vector3.up * velocityFactor;
+			//rb.velocity += Vector3.up * velocityFactor;
+			Vector3 updatedPosition = new Vector3(gameObject.transform.position.x, 
+			                                      0.0f,
+			                                      gameObject.transform.position.z);
+			Fire(updatedPosition, gameObject.transform.rotation, lastPlayerDirection);
 		}
 
 		if(jump && !joybutton.Pressed)
@@ -48,6 +71,50 @@ using UnityEngine;
 
 		//Twist();
 	}
+
+	public Vector3 SnapJoystickDirection(Vector3 currentDir)
+	{
+		Vector3 baseAngle = new Vector3(1.0f, 0.0f, 0.0f);
+		float currentAngle = Vector3.SignedAngle(baseAngle, currentDir, Vector3.down);
+                
+		if (Mathf.Abs(currentAngle) <= 45.0f)
+		{
+			return new Vector3(1.0f, 0.0f, 0.0f);
+		}
+		else if (currentAngle > 45.0f && currentAngle <= 135.0f)
+		{
+			return new Vector3(0.0f, 0.0f, 1.0f);
+		}
+		else if (Mathf.Abs(currentAngle) >= 135.0f)
+		{
+			return new Vector3(-1.0f, 0.0f, 0.0f);
+		} 
+		else if (currentAngle > -135.0f && currentAngle <= -45.0f)
+		{
+			return new Vector3(0.0f, 0.0f, -1.0f);
+		}
+		else
+		{
+            // Figure out how to do this the right way in Unity
+			Debug.Log("ERRRORRRRRRRR SOME CASE IS UNHANDLED" + baseAngle);
+			return baseAngle;
+		}
+	}
+
+	void Fire(Vector3 pos, Quaternion rot, Vector3 dir)
+    {
+        // Create the Bullet from the Bullet Prefab
+        var bullet = (GameObject)Instantiate(
+            bulletPrefab,
+			pos,
+			rot);
+
+        // Add velocity to the bullet
+		bullet.GetComponent<Rigidbody>().velocity = dir * 6;
+
+        // Destroy the bullet after 8 seconds
+        Destroy(bullet, 8.0f);
+    }
 
 	void Twist()
     {
@@ -60,7 +127,7 @@ using UnityEngine;
             Vector3 homeRot;
             if (curRot.y > 180f)
             { // this section determines the direction it returns home 
-                Debug.Log(curRot.y);
+                //Debug.Log(curRot.y);
                 homeRot = new Vector3(0f, 359.999f, 0f); //it doesnt return to perfect zero 
             }
             else
@@ -71,7 +138,7 @@ using UnityEngine;
         }
         else
         {
-			Debug.Log("gameobject" + gameObject.transform.rotation);         
+			//Debug.Log("gameobject" + gameObject.transform.rotation);         
 			gameObject.transform.localEulerAngles = new Vector3(0f, Mathf.Atan2(h1, v1) * 180 / Mathf.PI, 0f); // this does the actual rotaion according to inputs
         }
     }
