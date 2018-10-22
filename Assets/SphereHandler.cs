@@ -34,24 +34,23 @@ using UnityEngine;
                                   joystick.Vertical * velocityFactor);
 
 		Vector3 adjustedDir = SnapJoystickDirection(dir);
-		Debug.Log("Dir         : " + dir);
-		Debug.Log("Adjusted dir: " + adjustedDir);
 
+		float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
 
-		//Debug.Log("dir: " + dir);
-		rb.velocity = adjustedDir;
-
-		//float moveHorizontal = Input.GetAxis("Horizontal");
-  //      float moveVertical = Input.GetAxis("Vertical");
-
-  //      Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);        
-		//rb.AddForce(movement * speed);
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);        
+		rb.AddForce(movement * speed);
         
 		//Debug.Log("gameobject" + dir);
-		if(isTouching && (adjustedDir.x != 0 && adjustedDir.z != 0))
+		if(isTouching && (dir.x != 0 && dir.z != 0))
 		{
-			transform.rotation = Quaternion.LookRotation(dir);
+			rb.velocity = adjustedDir;
+			transform.rotation = Quaternion.LookRotation(adjustedDir);
 			lastPlayerDirection = dir;
+		}
+		else
+		{
+			rb.velocity = Vector3.zero;
 		}
 
         if(!jump && joybutton.Pressed)
@@ -74,24 +73,24 @@ using UnityEngine;
 
 	public Vector3 SnapJoystickDirection(Vector3 currentDir)
 	{
-		Vector3 baseAngle = new Vector3(1.0f, 0.0f, 0.0f);
+		Vector3 baseAngle = new Vector3(1.0f * velocityFactor, 0.0f, 0.0f);
 		float currentAngle = Vector3.SignedAngle(baseAngle, currentDir, Vector3.down);
                 
-		if (Mathf.Abs(currentAngle) <= 45.0f)
+		if (Mathf.Abs(currentAngle) <= 45.0f && Mathf.Abs(currentAngle) >= 0)
 		{
-			return new Vector3(1.0f, 0.0f, 0.0f);
+			return new Vector3(1.0f * velocityFactor, 0.0f, 0.0f);
 		}
 		else if (currentAngle > 45.0f && currentAngle <= 135.0f)
 		{
-			return new Vector3(0.0f, 0.0f, 1.0f);
+			return new Vector3(0.0f, 0.0f, 1.0f * velocityFactor);
 		}
-		else if (Mathf.Abs(currentAngle) >= 135.0f)
+		else if (Mathf.Abs(currentAngle) >= 135.0f && Mathf.Abs(currentAngle) <= 180.0f)
 		{
-			return new Vector3(-1.0f, 0.0f, 0.0f);
+			return new Vector3(-1.0f * velocityFactor, 0.0f, 0.0f);
 		} 
 		else if (currentAngle > -135.0f && currentAngle <= -45.0f)
 		{
-			return new Vector3(0.0f, 0.0f, -1.0f);
+			return new Vector3(0.0f, 0.0f, -1.0f * velocityFactor);
 		}
 		else
 		{
