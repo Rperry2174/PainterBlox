@@ -154,6 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCube: {fileID: 1413634895359904, guid: f401fd2b5a528418784b3b383219ff22, type: 2}
+  oddColor: {r: 9.380719, g: 46.249126, b: 9.380719, a: 1}
+  evenColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0

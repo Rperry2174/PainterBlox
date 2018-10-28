@@ -12,7 +12,8 @@ public class GroundCubeController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameObject.GetComponent<Renderer>().material.color = originalBoxColor;
+		//gameObject.GetComponent<Renderer>().material.color = originalBoxColor;
+		originalBoxColor = gameObject.GetComponent<Renderer>().material.color;
 		originalBoxPosition = gameObject.transform.position;
 	}
 	
