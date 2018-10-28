@@ -59,7 +59,7 @@ using UnityEngine;
 			Vector3 updatedPosition = new Vector3(gameObject.transform.position.x, 
 			                                      0.0f,
 			                                      gameObject.transform.position.z);
-			Fire(updatedPosition, gameObject.transform.rotation, lastPlayerDirection);
+			Fire(updatedPosition, gameObject.transform.rotation, SnapJoystickDirection(lastPlayerDirection));
 		}
 
 		if(jump && !joybutton.Pressed)
