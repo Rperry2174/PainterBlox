@@ -22,6 +22,9 @@ public class GroundController : MonoBehaviour {
 				gc.GetComponent<Renderer>().material.color = GetColor(i, j);
 				gc.GetComponent<GroundCubeController>().index = new Vector2(i, j);
 
+                // Add gameObject as child of Ground parent
+				gc.transform.parent = gameObject.transform;
+
 				objects[i, j] = gc;
 				colorCounter += 1;
             }
