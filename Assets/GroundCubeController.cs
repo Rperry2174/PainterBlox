@@ -8,7 +8,9 @@ public class GroundCubeController : MonoBehaviour {
 	public Color triggerBoxColor = new Color(0f, 0f, 255f);
 	public BoxCollider triggerCollider;
     public BoxCollider groundCollider;
+	public Vector2 index;
 	public bool isFalling = false;
+	public bool hasPlayer = false;
 
 	// Use this for initialization
 	void Start () {
@@ -25,24 +27,50 @@ public class GroundCubeController : MonoBehaviour {
 		}
 	}
 
-	void ChangeColor (Color newColor) {
-		gameObject.GetComponent<Renderer>().material.color = newColor;
+	void ChangeColor () {
+		if (hasPlayer)
+		{
+			gameObject.GetComponent<Renderer>().material.color = triggerBoxColor;	
+		}
+		else
+		{
+			gameObject.GetComponent<Renderer>().material.color = originalBoxColor;            
+		}
 	}
 
 	private void OnTriggerEnter(Collider col)
     {
-		if(col.gameObject.tag == "Bullet")
+		if (col.gameObject.tag == "Player")
 		{
-			isFalling = true;
-			StartCoroutine(Respawn());
+			hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
+			ChangeColor();            
 		}
-		ChangeColor(triggerBoxColor);
+
+		if (col.gameObject.tag == "Bullet" && !hasPlayer)
+        {
+            isFalling = true;
+            StartCoroutine(Respawn());
+        }
     }
 
-	private void OnTriggerExit(Collider other)
+	private void OnTriggerStay(Collider col)
+	{
+		if (col.gameObject.tag == "Player")
+        {
+            hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
+            ChangeColor();
+        }          
+		//print("hasPlayer?" + hasPlayer + "\nIndex " + index + "_"+ col.gameObject.transform.position);
+	}
+
+	private void OnTriggerExit(Collider col)
     {
+		if (col.gameObject.tag == "Player")
+        {
+            hasPlayer = false;
+			ChangeColor();
+        }
 		//Debug.Log("entered");
-		ChangeColor(originalBoxColor);
     }
 
 	IEnumerator Respawn()

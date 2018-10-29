@@ -20,6 +20,7 @@ public class GroundController : MonoBehaviour {
             {
 				GameObject gc = (GameObject)Instantiate(groundCube, new Vector3(i, 0, j), Quaternion.identity);
 				gc.GetComponent<Renderer>().material.color = GetColor(i, j);
+				gc.GetComponent<GroundCubeController>().index = new Vector2(i, j);
 
 				objects[i, j] = gc;
 				colorCounter += 1;
