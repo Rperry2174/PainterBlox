@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4695591219252342}
   m_Layer: 0
-  m_Name: NewGroundCube2
+  m_Name: GroundCubeWrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -105,7 +105,7 @@ using UnityEngine;
 			pos,
 			rot);
 
-		bullet.transform.parent = gameObject.transform;
+		bullet.transform.parent = gameObject.transform.parent;
 
         // Add velocity to the bullet
 		bullet.GetComponent<Rigidbody>().velocity = dir * 6;
