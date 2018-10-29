@@ -23,8 +23,17 @@ public class AirCubeController : MonoBehaviour
 
     void Update()
     {
-        
-    }
+		// todo: move to start
+		GroundCubeController groundCubeController = gameObject.transform.parent.GetComponentInChildren<GroundCubeController>();
+		if (groundCubeController.isFalling)
+		{
+			triggerCollider.isTrigger = false;
+		}
+		else
+		{
+			triggerCollider.isTrigger = true;
+		}
+	}
 
     private void OnTriggerEnter(Collider col)
     {

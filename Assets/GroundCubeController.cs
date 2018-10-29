@@ -6,8 +6,6 @@ public class GroundCubeController : MonoBehaviour {
 	public Vector3 originalBoxPosition;
 	public Color originalBoxColor;
 	public Color triggerBoxColor = new Color(0f, 0f, 255f);
-	public BoxCollider triggerCollider;
-    public BoxCollider groundCollider;
 	public Vector2 index;
 	public bool isFalling = false;
 	public bool hasPlayer = false;
@@ -37,41 +35,6 @@ public class GroundCubeController : MonoBehaviour {
 			gameObject.GetComponent<Renderer>().material.color = originalBoxColor;            
 		}
 	}
-
-	//private void OnTriggerEnter(Collider col)
- //   {
-	//	if (col.gameObject.tag == "Player")
-	//	{
-	//		hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
-	//		ChangeColor();            
-	//	}
-
-	//	if (col.gameObject.tag == "Bullet" && !hasPlayer)
- //       {
- //           isFalling = true;
- //           StartCoroutine(Respawn());
- //       }
- //   }
-
-	//private void OnTriggerStay(Collider col)
-	//{
-	//	if (col.gameObject.tag == "Player")
- //       {
- //           hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
- //           ChangeColor();
- //       }          
-	//	//print("hasPlayer?" + hasPlayer + "\nIndex " + index + "_"+ col.gameObject.transform.position);
-	//}
-
-	//private void OnTriggerExit(Collider col)
-  //  {
-		//if (col.gameObject.tag == "Player")
-  //      {
-  //          hasPlayer = false;
-		//	ChangeColor();
-  //      }
-		////Debug.Log("entered");
-    //}
 
 	public IEnumerator Respawn()
 	{
