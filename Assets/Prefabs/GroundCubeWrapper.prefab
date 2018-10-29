@@ -227,8 +227,6 @@ MonoBehaviour:
   originalBoxPosition: {x: 0, y: 0, z: 0}
   originalBoxColor: {r: 0, g: 0, b: 0, a: 0}
   triggerBoxColor: {r: 0, g: 0, b: 255, a: 1}
-  triggerCollider: {fileID: 0}
-  groundCollider: {fileID: 0}
   index: {x: 0, y: 0}
   isFalling: 0
   hasPlayer: 0
