@@ -57,7 +57,7 @@ using UnityEngine;
 			jump = true;
 			//rb.velocity += Vector3.up * velocityFactor;
 			Vector3 updatedPosition = new Vector3(gameObject.transform.position.x, 
-			                                      0.0f,
+			                                      0.50f,
 			                                      gameObject.transform.position.z);
 			Fire(updatedPosition, gameObject.transform.rotation, SnapJoystickDirection(lastPlayerDirection));
 		}
@@ -66,8 +66,6 @@ using UnityEngine;
 		{
 			jump = false;
 		}
-
-		//Twist();
 	}
 
 	public Vector3 SnapJoystickDirection(Vector3 currentDir)
@@ -94,7 +92,7 @@ using UnityEngine;
 		else
 		{
             // Figure out how to do this the right way in Unity
-			Debug.Log("ERRRORRRRRRRR SOME CASE IS UNHANDLED" + baseAngle);
+			Debug.Log("ERROR SOME CASE IS UNHANDLED" + baseAngle);
 			return baseAngle;
 		}
 	}
@@ -107,37 +105,12 @@ using UnityEngine;
 			pos,
 			rot);
 
+		bullet.transform.parent = gameObject.transform;
+
         // Add velocity to the bullet
 		bullet.GetComponent<Rigidbody>().velocity = dir * 6;
 
-        // Destroy the bullet after 8 seconds
-        Destroy(bullet, 8.0f);
-    }
-
-	void Twist()
-    {
-		float h1 = Input.GetAxis("Horizontal");
-        float v1 = Input.GetAxis("Vertical");
-
-        if (h1 == 0f && v1 == 0f)
-        { // this statement allows it to recenter once the inputs are at zero 
-			Vector3 curRot = gameObject.transform.localEulerAngles; // the object you are rotating
-            Vector3 homeRot;
-            if (curRot.y > 180f)
-            { // this section determines the direction it returns home 
-                //Debug.Log(curRot.y);
-                homeRot = new Vector3(0f, 359.999f, 0f); //it doesnt return to perfect zero 
-            }
-            else
-            {                                                                      // otherwise it rotates wrong direction 
-                homeRot = Vector3.zero;
-            }
-			gameObject.transform.localEulerAngles = Vector3.Slerp(curRot, homeRot, Time.deltaTime * 2);
-        }
-        else
-        {
-			//Debug.Log("gameobject" + gameObject.transform.rotation);         
-			gameObject.transform.localEulerAngles = new Vector3(0f, Mathf.Atan2(h1, v1) * 180 / Mathf.PI, 0f); // this does the actual rotaion according to inputs
-        }
+        // Destroy the bullet after 4 seconds
+        Destroy(bullet, 4.0f);
     }
 }

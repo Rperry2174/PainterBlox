@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundCubeController : MonoBehaviour {
 	public Vector3 originalBoxPosition;
-	public Color originalBoxColor = new Color(140f, 101f, 51f);
+	public Color originalBoxColor;
 	public Color triggerBoxColor = new Color(0f, 0f, 255f);
 	public BoxCollider triggerCollider;
     public BoxCollider groundCollider;
@@ -27,7 +27,7 @@ public class GroundCubeController : MonoBehaviour {
 		}
 	}
 
-	void ChangeColor () {
+	public void ChangeColor () {
 		if (hasPlayer)
 		{
 			gameObject.GetComponent<Renderer>().material.color = triggerBoxColor;	
@@ -38,42 +38,42 @@ public class GroundCubeController : MonoBehaviour {
 		}
 	}
 
-	private void OnTriggerEnter(Collider col)
-    {
-		if (col.gameObject.tag == "Player")
-		{
-			hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
-			ChangeColor();            
-		}
+	//private void OnTriggerEnter(Collider col)
+ //   {
+	//	if (col.gameObject.tag == "Player")
+	//	{
+	//		hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
+	//		ChangeColor();            
+	//	}
 
-		if (col.gameObject.tag == "Bullet" && !hasPlayer)
-        {
-            isFalling = true;
-            StartCoroutine(Respawn());
-        }
-    }
+	//	if (col.gameObject.tag == "Bullet" && !hasPlayer)
+ //       {
+ //           isFalling = true;
+ //           StartCoroutine(Respawn());
+ //       }
+ //   }
 
-	private void OnTriggerStay(Collider col)
-	{
-		if (col.gameObject.tag == "Player")
-        {
-            hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
-            ChangeColor();
-        }          
-		//print("hasPlayer?" + hasPlayer + "\nIndex " + index + "_"+ col.gameObject.transform.position);
-	}
+	//private void OnTriggerStay(Collider col)
+	//{
+	//	if (col.gameObject.tag == "Player")
+ //       {
+ //           hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
+ //           ChangeColor();
+ //       }          
+	//	//print("hasPlayer?" + hasPlayer + "\nIndex " + index + "_"+ col.gameObject.transform.position);
+	//}
 
-	private void OnTriggerExit(Collider col)
-    {
-		if (col.gameObject.tag == "Player")
-        {
-            hasPlayer = false;
-			ChangeColor();
-        }
-		//Debug.Log("entered");
-    }
+	//private void OnTriggerExit(Collider col)
+  //  {
+		//if (col.gameObject.tag == "Player")
+  //      {
+  //          hasPlayer = false;
+		//	ChangeColor();
+  //      }
+		////Debug.Log("entered");
+    //}
 
-	IEnumerator Respawn()
+	public IEnumerator Respawn()
 	{
 		//print("start: " + Time.time);
         yield return new WaitForSeconds(5);

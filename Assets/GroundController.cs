@@ -19,8 +19,9 @@ public class GroundController : MonoBehaviour {
             for (int j = 0; j < 8; j++)
             {
 				GameObject gc = (GameObject)Instantiate(groundCube, new Vector3(i, 0, j), Quaternion.identity);
-				gc.GetComponent<Renderer>().material.color = GetColor(i, j);
-				gc.GetComponent<GroundCubeController>().index = new Vector2(i, j);
+				Renderer groundBoxRenderer = gc.GetComponentsInChildren<Renderer>()[0];
+				groundBoxRenderer.material.color = GetColor(i, j);
+				gc.GetComponentInChildren<GroundCubeController>().index = new Vector2(i, j);
 
                 // Add gameObject as child of Ground parent
 				gc.transform.parent = gameObject.transform;

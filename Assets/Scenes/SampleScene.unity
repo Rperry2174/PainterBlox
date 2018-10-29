@@ -153,9 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e346692be65fc47ab8ea2eae39cfca6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCube: {fileID: 1413634895359904, guid: f401fd2b5a528418784b3b383219ff22, type: 2}
-  oddColor: {r: 9.380719, g: 46.249126, b: 9.380719, a: 1}
-  evenColor: {r: 0, g: 0, b: 0, a: 1}
+  groundCube: {fileID: 1397386531770996, guid: 5071910f2fdca4c318630553f08f33da, type: 2}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +588,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4447471140864114, guid: d7bd2c021630246239052b11b1e5924e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.23
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 4447471140864114, guid: d7bd2c021630246239052b11b1e5924e, type: 2}
       propertyPath: m_LocalPosition.y

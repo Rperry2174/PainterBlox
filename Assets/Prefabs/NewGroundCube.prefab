@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23962098196967280}
   - component: {fileID: 65319791225647332}
   - component: {fileID: 114592881661586888}
-  - component: {fileID: 65608956350097768}
   - component: {fileID: 65579902837092694}
   m_Layer: 0
   m_Name: NewGroundCube
@@ -39,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1413634895359904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.06, y: 1.2, z: -0.08404732}
+  m_LocalPosition: {x: 7.396468, y: 1.2225571, z: 1.0509443}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -111,18 +110,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.5465727, z: 1}
   m_Center: {x: 0, y: 0.77328634, z: 0}
---- !u!65 &65608956350097768
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413634895359904}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114592881661586888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,7 +121,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc0209b6aa59474c83aeddaac796fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originalBoxPosition: {x: 0, y: 0, z: 0}
   originalBoxColor: {r: 140, g: 101, b: 51, a: 1}
   triggerBoxColor: {r: 0, g: 0, b: 255, a: 1}
   triggerCollider: {fileID: 65579902837092694}
   groundCollider: {fileID: 65319791225647332}
+  index: {x: 0, y: 0}
+  isFalling: 0
+  hasPlayer: 0
