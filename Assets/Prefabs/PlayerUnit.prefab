@@ -68,6 +68,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4603895719466304}
   - component: {fileID: 114016317422870822}
+  - component: {fileID: 114763708457254912}
+  - component: {fileID: 114959723650204026}
+  - component: {fileID: 114708761653428276}
   m_Layer: 0
   m_Name: PlayerUnit
   m_TagString: Untagged
@@ -269,7 +272,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1305566348164254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.2094293, y: 1.417879, z: -10.824422}
+  m_LocalPosition: {x: 2, y: 2, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4441545799346930}
@@ -360,7 +363,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1508889, y: 1.3025093, z: 1.085743}
+  m_Size: {x: 0.5, y: 1.2, z: 0.5}
   m_Center: {x: -8.3951685e-18, y: 0.65118456, z: -0.037808478}
 --- !u!95 &95664059162462238
 Animator:
@@ -411,7 +414,7 @@ MonoBehaviour:
     i14: 57
     i15: 255
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114134606496783550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,6 +433,57 @@ MonoBehaviour:
   lastPlayerDirection: {x: 0, y: 0, z: 0}
   rb: {fileID: 54055659841984900}
   animator: {fileID: 0}
+--- !u!114 &114708761653428276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305566348164254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07571666f2a684d3585d433a6a7c5a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114763708457254912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305566348164254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4441545799346930}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
+--- !u!114 &114959723650204026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305566348164254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!137 &137887837788829836
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

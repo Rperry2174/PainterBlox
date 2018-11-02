@@ -27,11 +27,11 @@ public class AirCubeController : MonoBehaviour
 		GroundCubeController groundCubeController = gameObject.transform.parent.GetComponentInChildren<GroundCubeController>();
 		if (groundCubeController.isFalling)
 		{
-			triggerCollider.isTrigger = false;
+			//triggerCollider.isTrigger = false;
 		}
 		else
 		{
-			triggerCollider.isTrigger = true;
+			//triggerCollider.isTrigger = true;
 		}
 	}
 

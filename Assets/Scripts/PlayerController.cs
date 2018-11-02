@@ -14,6 +14,9 @@ using UnityEngine;
 	public Vector3 lastPlayerDirection;
 	public Rigidbody rb;
 	public Animator animator;
+	public float bufferFactor = 1.5f;
+	public Vector3 buffer;
+
 	// Use this for initialization
 	void Start () {
 		joystick = FindObjectOfType<Joystick>();
@@ -27,6 +30,11 @@ using UnityEngine;
 	
 	// Update is called once per frame
 	void Update () {
+
+		if ( !gameObject.GetComponentInParent<PlayerUnitController>().isLocalPlayer )
+		{
+			return;
+		}
 
 
         Vector3 dir = new Vector3(joystick.Horizontal * velocityFactor,
@@ -78,18 +86,22 @@ using UnityEngine;
                 
 		if (Mathf.Abs(currentAngle) <= 45.0f && Mathf.Abs(currentAngle) >= 0)
 		{
+			buffer = new Vector3(bufferFactor, 0.0f, 0.0f);
 			return new Vector3(1.0f * velocityFactor, 0.0f, 0.0f);
 		}
 		else if (currentAngle > 45.0f && currentAngle <= 135.0f)
 		{
+			buffer = new Vector3(0.0f, 0.0f, bufferFactor);
 			return new Vector3(0.0f, 0.0f, 1.0f * velocityFactor);
 		}
 		else if (Mathf.Abs(currentAngle) >= 135.0f && Mathf.Abs(currentAngle) <= 180.0f)
 		{
+			buffer = new Vector3(-bufferFactor, 0.0f, 0.0f);         
 			return new Vector3(-1.0f * velocityFactor, 0.0f, 0.0f);
 		} 
 		else if (currentAngle > -135.0f && currentAngle <= -45.0f)
 		{
+			buffer = new Vector3(0.0f, 0.0f, -bufferFactor);                  
 			return new Vector3(0.0f, 0.0f, -1.0f * velocityFactor);
 		}
 		else
@@ -105,7 +117,7 @@ using UnityEngine;
         // Create the Bullet from the Bullet Prefab
         var bullet = (GameObject)Instantiate(
             bulletPrefab,
-			pos,
+			pos + buffer,
 			rot);
 
 		bullet.transform.parent = gameObject.transform.parent;
