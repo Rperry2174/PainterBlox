@@ -42,7 +42,10 @@ public class AirCubeController : MonoBehaviour
         
         if (col.gameObject.tag == "Player")
         {
-			groundCubeController.hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
+			//Debug.Log("AirCubeController::OnTriggerEnter::Player" + col.gameObject);
+			//Debug.Log("AirCubeController::OnTriggerEnter::Player.position" + col.gameObject.transform.position + Vector3.up);
+			//Debug.Log("AirCubeController::OnTriggerEnter::Player.triggerCollider.bounds" + triggerCollider.bounds);
+			groundCubeController.hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position + Vector3.up);
 			groundCubeController.ChangeColor();
         }
         
@@ -61,7 +64,7 @@ public class AirCubeController : MonoBehaviour
 
         if (col.gameObject.tag == "Player")
         {
-			groundCubeController.hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position);
+			groundCubeController.hasPlayer = triggerCollider.bounds.Contains(col.gameObject.transform.position + Vector3.up);
 			groundCubeController.ChangeColor();
         }
     }

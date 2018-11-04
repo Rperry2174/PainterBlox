@@ -6,7 +6,7 @@ using UnityEngine;
 
 	protected Joystick joystick;
 	protected Joybutton joybutton;
-    
+
 	protected bool jump;
 	public GameObject bulletPrefab;
 	public float velocityFactor = 2.5f;
@@ -27,7 +27,7 @@ using UnityEngine;
                                           joystick.Vertical * velocityFactor);
 		animator = gameObject.GetComponent<Animator>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -46,9 +46,9 @@ using UnityEngine;
 		float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);        
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 		rb.AddForce(movement * speed);
-        
+
 		//Debug.Log("gameobject" + dir);
 		if(dir.x != 0 && dir.z != 0)
 		{
@@ -67,7 +67,7 @@ using UnityEngine;
 		{
 			jump = true;
 			//rb.velocity += Vector3.up * velocityFactor;
-			Vector3 updatedPosition = new Vector3(gameObject.transform.position.x, 
+			Vector3 updatedPosition = new Vector3(gameObject.transform.position.x,
 			                                      0.50f,
 			                                      gameObject.transform.position.z);
 			Fire(updatedPosition, gameObject.transform.rotation, SnapJoystickDirection(lastPlayerDirection));
@@ -83,7 +83,7 @@ using UnityEngine;
 	{
 		Vector3 baseAngle = new Vector3(1.0f * velocityFactor, 0.0f, 0.0f);
 		float currentAngle = Vector3.SignedAngle(baseAngle, currentDir, Vector3.down);
-                
+
 		if (Mathf.Abs(currentAngle) <= 45.0f && Mathf.Abs(currentAngle) >= 0)
 		{
 			buffer = new Vector3(bufferFactor, 0.0f, 0.0f);
@@ -96,12 +96,12 @@ using UnityEngine;
 		}
 		else if (Mathf.Abs(currentAngle) >= 135.0f && Mathf.Abs(currentAngle) <= 180.0f)
 		{
-			buffer = new Vector3(-bufferFactor, 0.0f, 0.0f);         
+			buffer = new Vector3(-bufferFactor, 0.0f, 0.0f);
 			return new Vector3(-1.0f * velocityFactor, 0.0f, 0.0f);
-		} 
+		}
 		else if (currentAngle > -135.0f && currentAngle <= -45.0f)
 		{
-			buffer = new Vector3(0.0f, 0.0f, -bufferFactor);                  
+			buffer = new Vector3(0.0f, 0.0f, -bufferFactor);
 			return new Vector3(0.0f, 0.0f, -1.0f * velocityFactor);
 		}
 		else

@@ -28,6 +28,7 @@ public class GroundCubeController : MonoBehaviour {
 	public void ChangeColor () {
 		if (hasPlayer)
 		{
+			Debug.Log("GroundCubeController::hasPLayer" + hasPlayer);
 			gameObject.GetComponent<Renderer>().material.color = triggerBoxColor;	
 		}
 		else
