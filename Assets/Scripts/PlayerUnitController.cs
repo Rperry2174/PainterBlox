@@ -74,10 +74,10 @@ public class PlayerUnitController : NetworkBehaviour
 		if (joybutton.Pressed)
 		{
 			//rb.velocity += Vector3.up * velocityFactor;
-			Vector3 updatedPosition = new Vector3(gameObject.transform.position.x,
+			Vector3 updatedPosition = new Vector3(animalPrefab.transform.position.x,
 												  0.50f,
-												  gameObject.transform.position.z);
-			Fire(updatedPosition, gameObject.transform.rotation, SnapJoystickDirection(lastPlayerDirection));
+			                                      animalPrefab.transform.position.z);
+			CmdFire(updatedPosition, animalPrefab.transform.rotation, SnapJoystickDirection(lastPlayerDirection));
 		}
 	}
 
@@ -114,19 +114,20 @@ public class PlayerUnitController : NetworkBehaviour
 		}
 	}
 
-	void Fire(Vector3 pos, Quaternion rot, Vector3 dir)
+	[Command]
+	void CmdFire(Vector3 pos, Quaternion rot, Vector3 dir)
 	{
 		// Create the Bullet from the Bullet Prefab
-		var bullet = (GameObject)Instantiate(
+		GameObject bullet = Instantiate(
 			bulletPrefab,
-			pos + buffer,
+			pos + buffer + Vector3.up,
 			rot);
 
-		bullet.transform.parent = gameObject.transform.parent;
-		NetworkServer.Spawn(bullet);
-		// Add velocity to the bullet
-		bullet.GetComponent<Rigidbody>().velocity = dir * 6;
+		bullet.GetComponent<BulletController>().dir = dir * 6;
 
+        //bullet.transform.parent = gameObject.transform.parent;
+        NetworkServer.Spawn(bullet);
+        // Add velocity to the bullet
 		// Destroy the bullet after 4 seconds
 		Destroy(bullet, 4.0f);
 	}

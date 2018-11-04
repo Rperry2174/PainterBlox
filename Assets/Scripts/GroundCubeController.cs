@@ -9,6 +9,7 @@ public class GroundCubeController : MonoBehaviour {
 	public Vector2 index;
 	public bool isFalling = false;
 	public bool hasPlayer = false;
+	public bool hasBullet = false;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +29,7 @@ public class GroundCubeController : MonoBehaviour {
 	public void ChangeColor () {
 		if (hasPlayer)
 		{
-			Debug.Log("GroundCubeController::hasPLayer" + hasPlayer);
+			//Debug.Log("GroundCubeController::hasPLayer" + hasPlayer);
 			gameObject.GetComponent<Renderer>().material.color = triggerBoxColor;	
 		}
 		else
@@ -42,6 +43,7 @@ public class GroundCubeController : MonoBehaviour {
 		//print("start: " + Time.time);
         yield return new WaitForSeconds(5);
 		isFalling = false;
+		hasBullet = false;
 		gameObject.transform.position = originalBoxPosition;
 	}
 

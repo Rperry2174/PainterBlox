@@ -53,8 +53,12 @@ public class AirCubeController : MonoBehaviour
 		if (col.gameObject.tag == "Bullet" && !groundCubeController.hasPlayer)
         {
 
-			groundCubeController.isFalling = true;
-			groundCubeController.StartCoroutine(groundCubeController.Respawn());
+			groundCubeController.hasBullet = triggerCollider.bounds.Contains(col.gameObject.transform.position);         
+			if (groundCubeController.hasBullet)
+			{
+				groundCubeController.isFalling = true;
+				groundCubeController.StartCoroutine(groundCubeController.Respawn());
+            }
         }
     }
 

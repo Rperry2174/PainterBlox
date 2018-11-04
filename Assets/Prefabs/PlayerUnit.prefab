@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4441545799346930}
   - component: {fileID: 95664059162462238}
   - component: {fileID: 54055659841984900}
-  - component: {fileID: 114134606496783550}
   m_Layer: 0
   m_Name: Panda
   m_TagString: Player
@@ -68,9 +67,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4603895719466304}
   - component: {fileID: 114016317422870822}
-  - component: {fileID: 114763708457254912}
   - component: {fileID: 114959723650204026}
   - component: {fileID: 114708761653428276}
+  - component: {fileID: 114980318514879072}
   m_Layer: 0
   m_Name: PlayerUnit
   m_TagString: Untagged
@@ -415,24 +414,6 @@ MonoBehaviour:
     i15: 255
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114134606496783550
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1098676814535072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c8e87071e8cc4d89b87cd26c23e6cb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1221359678319664, guid: bf13f196c89274a6aa6b9d81e72d348f,
-    type: 2}
-  velocityFactor: 3.5
-  speed: 0
-  lastPlayerDirection: {x: 0, y: 0, z: 0}
-  rb: {fileID: 54055659841984900}
-  animator: {fileID: 0}
 --- !u!114 &114708761653428276
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -444,25 +425,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07571666f2a684d3585d433a6a7c5a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114763708457254912
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1305566348164254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 4441545799346930}
-  m_ChildIndex: 0
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_MovementThreshold: 0.001
-  m_InterpolateRotation: 0.5
-  m_InterpolateMovement: 0.5
+  bufferFactor: 1.5
+  velocityFactor: 2.5
+  speed: 0
+  bulletPrefab: {fileID: 1221359678319664, guid: bf13f196c89274a6aa6b9d81e72d348f,
+    type: 2}
+  animalPrefab: {fileID: 1098676814535072}
+  buffer: {x: 0, y: 0, z: 0}
+  lastPlayerDirection: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &114959723650204026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -484,6 +456,25 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114980318514879072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1305566348164254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4441545799346930}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
 --- !u!137 &137887837788829836
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
